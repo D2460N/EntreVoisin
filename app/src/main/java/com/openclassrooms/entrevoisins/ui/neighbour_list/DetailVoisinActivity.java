@@ -21,7 +21,7 @@ public class DetailVoisinActivity extends AppCompatActivity {
     @BindView(R.id.imageButtonFav)
     ImageButton mImageButtonFav;
 
-    @BindView(R.id.imageViewAvatar)
+    @BindView(R.id.image_avatar)
     ImageView mImageViewAvatar;
 
     @BindView(R.id.nameProfil)
