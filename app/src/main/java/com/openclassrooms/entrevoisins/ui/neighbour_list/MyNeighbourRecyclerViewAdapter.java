@@ -23,17 +23,26 @@ import butterknife.ButterKnife;
 
 public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeighbourRecyclerViewAdapter.ViewHolder> {
 
+
     private final List<Neighbour> mNeighbours;
+
+    public MyNeighbourRecyclerViewAdapter(List<Neighbour> neighbours, onItemListener onItemListener) {
+        mNeighbours = neighbours;
+        mOnItemListener = onItemListener;
+    }
+
+    private onItemListener mOnItemListener;
 
     public MyNeighbourRecyclerViewAdapter(List<Neighbour> items) {
         mNeighbours = items;
+
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_neighbour, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view,mOnItemListener);
     }
 
     @Override
@@ -58,7 +67,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         return mNeighbours.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.item_list_avatar)
         public ImageView mNeighbourAvatar;
         @BindView(R.id.item_list_name)
@@ -66,9 +75,27 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         @BindView(R.id.item_list_delete_button)
         public ImageButton mDeleteButton;
 
-        public ViewHolder(View view) {
+        onItemListener mOnItemListener;
+
+        public ViewHolder(View view,onItemListener mOnItemListener) {
             super(view);
             ButterKnife.bind(this, view);
+            this.mOnItemListener = mOnItemListener;
+
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            mOnItemListener.onItemClick(getAdapterPosition());
+
         }
     }
+    /**
+     * create interface for detect the click
+     */
+    public interface onItemListener{
+        void onItemClick (int position);
+    }
+
 }
