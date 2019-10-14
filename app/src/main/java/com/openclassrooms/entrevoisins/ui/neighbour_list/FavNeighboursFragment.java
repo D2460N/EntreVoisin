@@ -37,6 +37,7 @@ public class FavNeighboursFragment extends Fragment implements MyNeighbourRecycl
     private RecyclerView mRecyclerView;
 
 
+
     public FavNeighboursFragment() {
         // Required empty public constructor
     }
