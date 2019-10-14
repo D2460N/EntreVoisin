@@ -9,6 +9,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
@@ -19,7 +21,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class DetailVoisinActivity extends AppCompatActivity {
-    private NeighbourApiService mApiService;
+
+    private NeighbourApiService mApiService = DI.getNeighbourApiService();
     private Neighbour mNeighbour;
 
     //UI COMPENANTS
@@ -51,8 +54,14 @@ public class DetailVoisinActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_voisin);
         ButterKnife.bind(this);
 
+        showDetail();
+
+        if(getIntent().hasExtra("Neighbour")) {
+            mNeighbour = getIntent().getParcelableExtra("Neighbour");
+        }
 
         mImageButtonFav.setOnClickListener(v -> {
+
 
         });
 
@@ -61,8 +70,13 @@ public class DetailVoisinActivity extends AppCompatActivity {
             startActivity(intent);
 
         });
+    }
+    private void showDetail(){
+
 
     }
+
+
 
 
 }
