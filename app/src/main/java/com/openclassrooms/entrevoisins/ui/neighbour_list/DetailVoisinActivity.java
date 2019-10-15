@@ -24,6 +24,7 @@ public class DetailVoisinActivity extends AppCompatActivity {
 
     private NeighbourApiService mApiService = DI.getNeighbourApiService();
     private Neighbour mNeighbour;
+    private Intent m_intent;
 
     //UI COMPENANTS
     @BindView(R.id.imageButtonBack)
@@ -53,12 +54,19 @@ public class DetailVoisinActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_voisin);
         ButterKnife.bind(this);
+        mApiService = DI.getNeighbourApiService();
 
-        showDetail();
+        if (getIntent().hasExtra("Neighbour")) {
+            Neighbour neighbour = getIntent().getParcelableExtra("Neighbour");
 
-        if(getIntent().hasExtra("Neighbour")) {
-            mNeighbour = getIntent().getParcelableExtra("Neighbour");
+            Glide.with(this)
+                    .load(neighbour.getAvatarUrl())
+                    .into(mImageViewAvatar);
+
+            mTextViewNameProfil.setText(neighbour.getName());
+            mTextViewMailText.setText("www.facebook.fr/" + neighbour.getName());
         }
+
 
         mImageButtonFav.setOnClickListener(v -> {
 
@@ -66,17 +74,19 @@ public class DetailVoisinActivity extends AppCompatActivity {
         });
 
         mButtonBack.setOnClickListener(v -> {
-            Intent intent = new Intent(DetailVoisinActivity.this,ListNeighbourActivity.class);
+            Intent intent = new Intent(DetailVoisinActivity.this, ListNeighbourActivity.class);
             startActivity(intent);
+
 
         });
     }
-    private void showDetail(){
-
-
-    }
-
-
 
 
 }
+
+
+
+
+
+
+

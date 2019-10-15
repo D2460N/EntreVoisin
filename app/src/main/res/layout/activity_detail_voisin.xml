@@ -26,14 +26,19 @@
         android:layout_height="wrap_content"
         app:srcCompat="?attr/actionModeCloseDrawable"
         tools:ignore="MissingConstraints"
+        android:tint="@color/cardview_dark_background"
+        app:backgroundTint="@color/cardview_light_background"
         />
 
     <TextView
         android:id="@+id/nameProfil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
         tools:layout_editor_absoluteX="-14dp"
         tools:layout_editor_absoluteY="227dp"
+        android:textSize="40dp"
+        android:textColor="@color/cardview_light_background"
         tools:ignore="MissingConstraints" />
 
 

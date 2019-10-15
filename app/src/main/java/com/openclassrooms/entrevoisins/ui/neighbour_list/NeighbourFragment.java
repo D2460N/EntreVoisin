@@ -29,6 +29,7 @@ public class NeighbourFragment extends Fragment implements MyNeighbourRecyclerVi
     private NeighbourApiService mApiService;
     private List<Neighbour> mNeighbours;
     private RecyclerView mRecyclerView;
+    Neighbour neighbour;
 
 
 
@@ -91,9 +92,12 @@ public class NeighbourFragment extends Fragment implements MyNeighbourRecyclerVi
 
     @Override
     public void onItemClick(int position) {
+
         mNeighbours.get(position);
         Context context = getActivity();
         Intent intent = new Intent (context,DetailVoisinActivity.class);
+        intent.putExtra("Neighbour",mNeighbours.get(position));
+
         startActivity(intent);
     }
 }

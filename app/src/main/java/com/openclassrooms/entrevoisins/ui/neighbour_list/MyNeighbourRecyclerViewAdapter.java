@@ -1,5 +1,7 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -89,6 +91,8 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         public void onClick(View v) {
             mOnItemListener.onItemClick(getAdapterPosition());
 
+
+
         }
     }
     /**
@@ -96,6 +100,8 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
      */
     public interface onItemListener{
         void onItemClick (int position);
+
     }
+
 
 }
