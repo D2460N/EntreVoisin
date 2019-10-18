@@ -2,18 +2,19 @@ package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
+import com.openclassrooms.entrevoisins.events.DeleteFavNeighbourEvent;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
@@ -35,7 +36,7 @@ public class FavNeighboursFragment extends Fragment implements MyNeighbourRecycl
     private NeighbourApiService mApiService;
     private List<Neighbour> mFavNeighbours;
     private RecyclerView mRecyclerView;
-
+    private MyNeighbourRecyclerViewAdapter mAdapter;
 
 
     public FavNeighboursFragment() {
@@ -74,8 +75,10 @@ public class FavNeighboursFragment extends Fragment implements MyNeighbourRecycl
     }
 
     private void initList() {
-        mFavNeighbours = mApiService.getNeighbours();
-        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mFavNeighbours, this));
+        mFavNeighbours = mApiService.getFavorites();
+        mAdapter = new MyNeighbourRecyclerViewAdapter(this.mFavNeighbours,this,1);
+        mRecyclerView.setAdapter(mAdapter);
+
 
     }
     @Override
@@ -92,21 +95,33 @@ public class FavNeighboursFragment extends Fragment implements MyNeighbourRecycl
 
     /**
      * Fired if the user clicks on a delete button
+     *
      * @param event
      */
     @Subscribe
-    public void onDeleteFavorites(DeleteNeighbourEvent event) {
-        mApiService.deleteNeighbour(event.neighbour);
+    public void onDeleteFavNeighbour(DeleteFavNeighbourEvent event) {
+        mApiService.deleteFavorites(event.neighbour);
+        Log.e("click","test");
         initList();
     }
 
     @Override
-    public void onItemClick ( int position){
+    public void onItemClick(int position) {
         mFavNeighbours.get(position);
         Context context = getActivity();
-        Intent intent = new Intent (context,DetailVoisinActivity.class);
+        Intent intent = new Intent(context, DetailVoisinActivity.class);
+        intent.putExtra("Neighbour", mFavNeighbours.get(position));
+
         startActivity(intent);
 
 
+    }
+
+    private void fake() {
+        for (int i = 0; i < 10; i++) {
+            Neighbour neighbour = new Neighbour(0, "n", "a");
+            mFavNeighbours.add(neighbour);
+            neighbour.setName("salut");
+        }
     }
 }

@@ -1,13 +1,17 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -22,16 +26,13 @@ import butterknife.ButterKnife;
 
 public class DetailVoisinActivity extends AppCompatActivity {
 
-    private NeighbourApiService mApiService = DI.getNeighbourApiService();
-    private Neighbour mNeighbour;
-    private Intent m_intent;
 
     //UI COMPENANTS
     @BindView(R.id.imageButtonBack)
     ImageButton mButtonBack;
 
-    @BindView(R.id.imageButtonFav)
-    ImageButton mImageButtonFav;
+    @BindView(R.id.floating_ButtonFav)
+    FloatingActionButton mImageButtonFav;
 
     @BindView(R.id.image_avatar)
     ImageView mImageViewAvatar;
@@ -47,6 +48,9 @@ public class DetailVoisinActivity extends AppCompatActivity {
 
     @BindView(R.id.activity_mail_text)
     TextView mTextViewMailText;
+
+    private NeighbourApiService mApiService;
+    private Neighbour mNeighbour;
 
 
     @Override
@@ -65,26 +69,24 @@ public class DetailVoisinActivity extends AppCompatActivity {
 
             mTextViewNameProfil.setText(neighbour.getName());
             mTextViewMailText.setText("www.facebook.fr/" + neighbour.getName());
+
+
+            mImageButtonFav.setOnClickListener(v -> {
+                if (!mApiService.getFavorites().contains(neighbour)) {
+                    mApiService.addFavorites(neighbour);
+                    Toast.makeText(this, "add to favorites", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(this, " already favorites ", Toast.LENGTH_SHORT).show();
+                }
+
+            });
+            mButtonBack.setOnClickListener(v -> {
+                Intent intent = new Intent(DetailVoisinActivity.this, ListNeighbourActivity.class);
+                startActivity(intent);
+            });
         }
-
-
-        mImageButtonFav.setOnClickListener(v -> {
-
-
-        });
-
-        mButtonBack.setOnClickListener(v -> {
-            Intent intent = new Intent(DetailVoisinActivity.this, ListNeighbourActivity.class);
-            startActivity(intent);
-
-
-        });
     }
-
-
 }
-
-
 
 
 

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +66,7 @@ public class NeighbourFragment extends Fragment implements MyNeighbourRecyclerVi
      */
     private void initList() {
         mNeighbours = mApiService.getNeighbours();
-        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours,this));
+        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours,this,0));
     }
 
     @Override
@@ -87,12 +88,12 @@ public class NeighbourFragment extends Fragment implements MyNeighbourRecyclerVi
     @Subscribe
     public void onDeleteNeighbour(DeleteNeighbourEvent event) {
         mApiService.deleteNeighbour(event.neighbour);
+        Log.e("click","test02");
         initList();
     }
 
     @Override
     public void onItemClick(int position) {
-
         mNeighbours.get(position);
         Context context = getActivity();
         Intent intent = new Intent (context,DetailVoisinActivity.class);
