@@ -17,6 +17,7 @@ import com.openclassrooms.entrevoisins.model.Neighbour;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 import butterknife.BindView;
@@ -30,13 +31,12 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
     private int mType;
 
 
-
     public MyNeighbourRecyclerViewAdapter(List<Neighbour> items, onItemListener onItemListener,int type) {
         mNeighbours = items;
         this.mOnItemListener = onItemListener;
         this.mType = type;
-    }
 
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -47,6 +47,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
+
         Neighbour neighbour = mNeighbours.get(position);
         holder.mNeighbourName.setText(neighbour.getName());
         Glide.with(holder.mNeighbourAvatar.getContext())
@@ -64,11 +65,8 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
                     EventBus.getDefault().post(new DeleteFavNeighbourEvent(neighbour));
 
                 }
-
             }
-
         });
-
     }
     @Override
     public int getItemCount() {

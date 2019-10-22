@@ -2,6 +2,10 @@
     <string name="app_name">Entrevoisins</string>
     <string name="tab_neighbour_title">My neighbours</string>
     <string name="tab_favorites_title">Favorites</string>
+    <string name="adress">Saint pierre du mont à 5km</string>
+    <string name="phone">+33 6 86 57 90 14</string>
+    <string name="title_desc"> A propos de moi</string>
+    <string name="description">Bonjour !Je souhaiterais faire de la marche nordique. pas initiée,je recherche une ou plusieurs personnes susceptibles de m accompagner !J\'aime les jeux de cartes tels la belote et le tarot..."</string>
 
 
     <string name="hello_blank_fragment">Hello blank fragment</string>

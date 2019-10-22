@@ -31,7 +31,7 @@ public class DetailVoisinActivity extends AppCompatActivity {
     @BindView(R.id.imageButtonBack)
     ImageButton mButtonBack;
 
-    @BindView(R.id.floating_ButtonFav)
+    @BindView(R.id.floatingActionButtonFav)
     FloatingActionButton mImageButtonFav;
 
     @BindView(R.id.image_avatar)
@@ -69,11 +69,15 @@ public class DetailVoisinActivity extends AppCompatActivity {
 
             mTextViewNameProfil.setText(neighbour.getName());
             mTextViewMailText.setText("www.facebook.fr/" + neighbour.getName());
+            if (mApiService.getFavorites().contains(neighbour)) {
+                mImageButtonFav.setImageResource(R.drawable.ic_star_white_24dp);
+            }
 
 
             mImageButtonFav.setOnClickListener(v -> {
                 if (!mApiService.getFavorites().contains(neighbour)) {
                     mApiService.addFavorites(neighbour);
+                    mImageButtonFav.setImageResource(R.drawable.ic_star_white_24dp);
                     Toast.makeText(this, "add to favorites", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(this, " already favorites ", Toast.LENGTH_SHORT).show();

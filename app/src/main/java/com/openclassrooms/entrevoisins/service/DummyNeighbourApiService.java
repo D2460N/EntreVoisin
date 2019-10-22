@@ -60,9 +60,9 @@ public class DummyNeighbourApiService implements NeighbourApiService {
      */
     @Override
     public void deleteFavorites(Neighbour neighbour) {
-        Log.e("click","delete01"+ neighbour.getName());
+
         if(favorites.contains(neighbour)){
-            Log.e("click","delete02"+ neighbour.getName());
+
             favorites.remove(neighbour);
         }
     }

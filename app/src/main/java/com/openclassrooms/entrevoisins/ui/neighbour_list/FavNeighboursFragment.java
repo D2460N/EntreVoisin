@@ -117,11 +117,4 @@ public class FavNeighboursFragment extends Fragment implements MyNeighbourRecycl
 
     }
 
-    private void fake() {
-        for (int i = 0; i < 10; i++) {
-            Neighbour neighbour = new Neighbour(0, "n", "a");
-            mFavNeighbours.add(neighbour);
-            neighbour.setName("salut");
-        }
     }
-}
