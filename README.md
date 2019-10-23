@@ -17,7 +17,7 @@
 - affichage détaillé du voisin
 - création d'une liste de  voisins favoris
 
-# Récuperation du programme
+# Récupération du programme
 
 en téléchargant le dossier Zip via le bouton Downlaod,
 ou via git clone en copiant l adresse : https://github.com/loots19/EntreVoisin
@@ -42,3 +42,5 @@ New/project from version control/ git/ copier le lien ci-dessus.
 
 
 ### Java
+
+### SCREENSCHOT
