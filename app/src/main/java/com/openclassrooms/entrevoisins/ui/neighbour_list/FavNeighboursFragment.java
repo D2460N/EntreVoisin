@@ -73,6 +73,9 @@ public class FavNeighboursFragment extends Fragment implements MyNeighbourRecycl
         initList();
         return view;
     }
+    /**
+     * Init the List of Favneighbours
+     */
 
     private void initList() {
         mFavNeighbours = mApiService.getFavorites();

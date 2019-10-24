@@ -54,14 +54,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:textSize="20dp"/>
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="46dp"
             app:srcCompat="@drawable/ic_location_on_black_24dp" />
 
         <TextView
@@ -69,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="34dp"
+            android:layout_marginTop="45dp"
             android:layout_marginEnd="8dp"
             android:text="Saint pierre du mont à 5km" />
 
@@ -78,7 +79,7 @@
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="74dp"
+            android:layout_marginTop="84dp"
             app:srcCompat="@drawable/ic_phone_black_24dp" />
 
         <TextView
@@ -86,7 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="80dp"
             android:layout_marginEnd="8dp"
             android:text="+33 6 86 57 90 14" />
 
@@ -95,7 +96,7 @@
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="110dp"
+            android:layout_marginTop="120dp"
             app:srcCompat="@drawable/ic_blur_circular_black_24dp" />
 
         <TextView
@@ -103,7 +104,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="108dp"
+            android:layout_marginTop="118dp"
             android:layout_marginEnd="8dp" />
 
 

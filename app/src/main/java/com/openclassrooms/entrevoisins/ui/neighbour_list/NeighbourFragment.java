@@ -32,8 +32,6 @@ public class NeighbourFragment extends Fragment implements MyNeighbourRecyclerVi
     private RecyclerView mRecyclerView;
     Neighbour neighbour;
 
-
-
     /**
      * Create and return a new instance
      * @return @{@link NeighbourFragment}

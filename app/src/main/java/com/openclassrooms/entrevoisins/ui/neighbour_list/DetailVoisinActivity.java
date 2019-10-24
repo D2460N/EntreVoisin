@@ -66,7 +66,7 @@ public class DetailVoisinActivity extends AppCompatActivity {
             Glide.with(this)
                     .load(neighbour.getAvatarUrl())
                     .into(mImageViewAvatar);
-
+            mTextViewNameText.setText(neighbour.getName());
             mTextViewNameProfil.setText(neighbour.getName());
             mTextViewMailText.setText("www.facebook.fr/" + neighbour.getName());
             if (mApiService.getFavorites().contains(neighbour)) {
