@@ -20,8 +20,8 @@ import butterknife.ButterKnife;
 
 public class DetailVoisinActivity extends AppCompatActivity {
 
-
     //UI COMPENANTS
+
     @BindView(R.id.imageButtonBack)
     ImageButton mButtonBack;
 
@@ -53,10 +53,14 @@ public class DetailVoisinActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_voisin);
         ButterKnife.bind(this);
         mApiService = DI.getNeighbourApiService();
-
+        /**
+         * get extra from class neighbour
+         */
         if (getIntent().hasExtra("Neighbour")) {
             Neighbour neighbour = getIntent().getParcelableExtra("Neighbour");
-
+        /**
+         * display extra on new activity
+         */
             Glide.with(this)
                     .load(neighbour.getAvatarUrl())
                     .into(mImageViewAvatar);
@@ -66,6 +70,9 @@ public class DetailVoisinActivity extends AppCompatActivity {
             if (mApiService.getFavorites().contains(neighbour)) {
                 mImageButtonFav.setImageResource(R.drawable.ic_star_white_24dp);
             }
+            /**
+             * get favorite when fav button is clicked
+             */
             mImageButtonFav.setOnClickListener(v -> {
                 if (!mApiService.getFavorites().contains(neighbour)) {
                     mApiService.addFavorites(neighbour);
@@ -76,6 +83,9 @@ public class DetailVoisinActivity extends AppCompatActivity {
                 }
 
             });
+            /**
+             * back to previously page
+             */
             mButtonBack.setOnClickListener(v -> {
                 finish();
             });
