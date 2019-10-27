@@ -1,5 +1,6 @@
-package com.openclassrooms.entrevoisins.ui.neighbour_list;
+package com.openclassrooms.entrevoisins.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +19,9 @@ import com.openclassrooms.entrevoisins.events.DeleteFavNeighbourEvent;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
+import com.openclassrooms.entrevoisins.ui.neighbour_list.DetailVoisinActivity;
+import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity;
+import com.openclassrooms.entrevoisins.ui.neighbour_list.MyNeighbourRecyclerViewAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -37,11 +41,7 @@ public class FavNeighboursFragment extends Fragment implements MyNeighbourRecycl
     private List<Neighbour> mFavNeighbours;
     private RecyclerView mRecyclerView;
     private MyNeighbourRecyclerViewAdapter mAdapter;
-
-
-    public FavNeighboursFragment() {
-        // Required empty public constructor
-    }
+    public static final int DETAIL_Activity_Request_Code = 1;
 
     /**
      * Use this factory method to create a new instance of
@@ -79,7 +79,7 @@ public class FavNeighboursFragment extends Fragment implements MyNeighbourRecycl
 
     private void initList() {
         mFavNeighbours = mApiService.getFavorites();
-        mAdapter = new MyNeighbourRecyclerViewAdapter(this.mFavNeighbours,this,1);
+        mAdapter = new MyNeighbourRecyclerViewAdapter(this.mFavNeighbours,this,MyNeighbourRecyclerViewAdapter.ListType.FAVORITE);
         mRecyclerView.setAdapter(mAdapter);
 
 
@@ -94,8 +94,13 @@ public class FavNeighboursFragment extends Fragment implements MyNeighbourRecycl
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
-    }
 
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        initList();
+    }
     /**
      * Fired if the user clicks on a delete button
      *
@@ -104,20 +109,18 @@ public class FavNeighboursFragment extends Fragment implements MyNeighbourRecycl
     @Subscribe
     public void onDeleteFavNeighbour(DeleteFavNeighbourEvent event) {
         mApiService.deleteFavorites(event.neighbour);
-        Log.e("click","test");
         initList();
     }
 
     @Override
     public void onItemClick(int position) {
-        mFavNeighbours.get(position);
         Context context = getActivity();
         Intent intent = new Intent(context, DetailVoisinActivity.class);
         intent.putExtra("Neighbour", mFavNeighbours.get(position));
 
-        startActivity(intent);
+        startActivityForResult(intent,1);
 
 
     }
 
-    }
+}

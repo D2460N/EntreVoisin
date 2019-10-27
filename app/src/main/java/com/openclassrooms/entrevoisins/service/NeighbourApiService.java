@@ -24,8 +24,8 @@ public interface NeighbourApiService {
 
 
     /**
-     * List favorites Neighbours
-     * @return
+     * Get all favorites Neighbours
+     * @return a list
      */
     List<Neighbour> getFavorites();
 

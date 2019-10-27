@@ -22,23 +22,24 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-enum EventClick{
-    FIRST,
-    SECOND
 
-}
+
 public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeighbourRecyclerViewAdapter.ViewHolder> {
+    public enum ListType{
+        NEIGHBOURS,
+        FAVORITE
 
-
+    }
     private final List<Neighbour> mNeighbours;
     private onItemListener mOnItemListener;
-    private int mType;
+    private ListType mType;
 
 
-    public MyNeighbourRecyclerViewAdapter(List<Neighbour> items, onItemListener onItemListener,int type) {
+    public MyNeighbourRecyclerViewAdapter(List<Neighbour> items, onItemListener onItemListener,ListType type) {
         mNeighbours = items;
         this.mOnItemListener = onItemListener;
         this.mType = type;
+
 
     }
 
@@ -62,13 +63,14 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mType==0){
+               switch (mType){
+                   case NEIGHBOURS:
                     EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
-
-                }else{
+                    break;
+                   case FAVORITE:
                     EventBus.getDefault().post(new DeleteFavNeighbourEvent(neighbour));
-
-                }
+                    break;
+               }
             }
         });
     }

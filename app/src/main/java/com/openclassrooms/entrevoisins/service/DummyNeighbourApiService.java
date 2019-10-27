@@ -46,14 +46,12 @@ public class DummyNeighbourApiService implements NeighbourApiService {
      * add neighbours to favorites list
      * @param neighbour
      */
-
     @Override
     public void addFavorites(Neighbour neighbour) {
         if(!favorites.contains(neighbour)){
             favorites.add(neighbour);
         }
     }
-
     /**
      * delete neighbours from favorites list
      * @param neighbour

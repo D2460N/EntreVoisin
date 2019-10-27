@@ -1,5 +1,6 @@
-package com.openclassrooms.entrevoisins.ui.neighbour_list;
+package com.openclassrooms.entrevoisins.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,13 +12,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
+import com.openclassrooms.entrevoisins.ui.neighbour_list.DetailVoisinActivity;
+import com.openclassrooms.entrevoisins.ui.neighbour_list.MyNeighbourRecyclerViewAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -30,7 +32,7 @@ public class NeighbourFragment extends Fragment implements MyNeighbourRecyclerVi
     private NeighbourApiService mApiService;
     private List<Neighbour> mNeighbours;
     private RecyclerView mRecyclerView;
-    Neighbour neighbour;
+
 
     /**
      * Create and return a new instance
@@ -64,7 +66,7 @@ public class NeighbourFragment extends Fragment implements MyNeighbourRecyclerVi
      */
     private void initList() {
         mNeighbours = mApiService.getNeighbours();
-        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours,this,0));
+        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours,this,MyNeighbourRecyclerViewAdapter.ListType.NEIGHBOURS));
     }
 
     @Override
@@ -79,6 +81,9 @@ public class NeighbourFragment extends Fragment implements MyNeighbourRecyclerVi
         EventBus.getDefault().unregister(this);
     }
 
+
+
+
     /**
      * Fired if the user clicks on a delete button
      * @param event
@@ -86,15 +91,13 @@ public class NeighbourFragment extends Fragment implements MyNeighbourRecyclerVi
     @Subscribe
     public void onDeleteNeighbour(DeleteNeighbourEvent event) {
         mApiService.deleteNeighbour(event.neighbour);
-        Log.e("click","test02");
         initList();
     }
 
     @Override
     public void onItemClick(int position) {
-        mNeighbours.get(position);
         Context context = getActivity();
-        Intent intent = new Intent (context,DetailVoisinActivity.class);
+        Intent intent = new Intent (context, DetailVoisinActivity.class);
         intent.putExtra("Neighbour",mNeighbours.get(position));
 
         startActivity(intent);
