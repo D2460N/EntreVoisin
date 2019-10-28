@@ -118,7 +118,7 @@ public class FavNeighboursFragment extends Fragment implements MyNeighbourRecycl
         Intent intent = new Intent(context, DetailVoisinActivity.class);
         intent.putExtra("Neighbour", mFavNeighbours.get(position));
 
-        startActivityForResult(intent,1);
+        startActivityForResult(intent,DETAIL_Activity_Request_Code);
 
 
     }

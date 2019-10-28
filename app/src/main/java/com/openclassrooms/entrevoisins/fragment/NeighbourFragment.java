@@ -81,9 +81,6 @@ public class NeighbourFragment extends Fragment implements MyNeighbourRecyclerVi
         EventBus.getDefault().unregister(this);
     }
 
-
-
-
     /**
      * Fired if the user clicks on a delete button
      * @param event
