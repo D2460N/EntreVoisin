@@ -28,6 +28,8 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -112,6 +114,12 @@ public class FavNeighboursFragment extends Fragment implements MyNeighbourRecycl
         initList();
     }
 
+    /**
+     * get position when the item is clicked
+     * start activity detailVoisin
+     * @param position
+     */
+
     @Override
     public void onItemClick(int position) {
         Context context = getActivity();
@@ -119,8 +127,8 @@ public class FavNeighboursFragment extends Fragment implements MyNeighbourRecycl
         intent.putExtra("Neighbour", mFavNeighbours.get(position));
 
         startActivityForResult(intent,DETAIL_Activity_Request_Code);
-
-
     }
 
+
 }
+

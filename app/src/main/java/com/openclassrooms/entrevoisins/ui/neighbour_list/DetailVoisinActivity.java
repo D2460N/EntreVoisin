@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
+import com.openclassrooms.entrevoisins.fragment.FavNeighboursFragment;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
@@ -47,6 +48,8 @@ public class DetailVoisinActivity extends AppCompatActivity {
     private Neighbour mNeighbour;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +70,10 @@ public class DetailVoisinActivity extends AppCompatActivity {
             mTextViewNameText.setText(neighbour.getName());
             mTextViewNameProfil.setText(neighbour.getName());
             mTextViewMailText.setText("www.facebook.fr/" + neighbour.getName());
+
+            /**
+             * dispay favorite  image button full when neighbour is already favorite.
+             */
             if (mApiService.getFavorites().contains(neighbour)) {
                 mImageButtonFav.setImageResource(R.drawable.ic_star_white_24dp);
             }
@@ -76,6 +83,9 @@ public class DetailVoisinActivity extends AppCompatActivity {
             mImageButtonFav.setOnClickListener(v -> {
                 if (!mApiService.getFavorites().contains(neighbour)) {
                     mApiService.addFavorites(neighbour);
+                    /**
+                     * if neighbour is not favorite image button is empty
+                     */
                     mImageButtonFav.setImageResource(R.drawable.ic_star_white_24dp);
                     Toast.makeText(this, "add to favorites", Toast.LENGTH_LONG).show();
                 } else {
@@ -87,6 +97,8 @@ public class DetailVoisinActivity extends AppCompatActivity {
              * back to previously page
              */
             mButtonBack.setOnClickListener(v -> {
+                Intent BackIntent = new Intent();
+                setResult(RESULT_OK,BackIntent);
                 finish();
             });
         }
