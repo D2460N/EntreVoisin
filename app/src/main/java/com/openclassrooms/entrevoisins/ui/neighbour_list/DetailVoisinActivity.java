@@ -1,5 +1,7 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
+import android.app.Activity;
+import android.app.Instrumentation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -48,22 +50,28 @@ public class DetailVoisinActivity extends AppCompatActivity {
     private Neighbour mNeighbour;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_voisin);
         ButterKnife.bind(this);
         mApiService = DI.getNeighbourApiService();
-        /**
-         * get extra from class neighbour
-         */
+
+
+        displayDetail();
+
+        actionOnFavoriteButton();
+        actionOnDeleteButton();
+
+    }
+
+    /**
+     * get extra and show detail of neighbour
+     */
+    private void displayDetail() {
         if (getIntent().hasExtra("Neighbour")) {
             Neighbour neighbour = getIntent().getParcelableExtra("Neighbour");
-        /**
-         * display extra on new activity
-         */
+
             Glide.with(this)
                     .load(neighbour.getAvatarUrl())
                     .into(mImageViewAvatar);
@@ -71,21 +79,27 @@ public class DetailVoisinActivity extends AppCompatActivity {
             mTextViewNameProfil.setText(neighbour.getName());
             mTextViewMailText.setText("www.facebook.fr/" + neighbour.getName());
 
-            /**
-             * dispay favorite  image button full when neighbour is already favorite.
-             */
+        }
+    }
+
+    /**
+     * display favorite  image button full when neighbour is already favorite.
+     * get favorite when fav button is clicked
+     * if neighbour is not favorite image button is empty
+     */
+
+    private void actionOnFavoriteButton() {
+        if (getIntent().hasExtra("Neighbour")) {
+            Neighbour neighbour = getIntent().getParcelableExtra("Neighbour");
+
             if (mApiService.getFavorites().contains(neighbour)) {
                 mImageButtonFav.setImageResource(R.drawable.ic_star_white_24dp);
             }
-            /**
-             * get favorite when fav button is clicked
-             */
+
             mImageButtonFav.setOnClickListener(v -> {
                 if (!mApiService.getFavorites().contains(neighbour)) {
                     mApiService.addFavorites(neighbour);
-                    /**
-                     * if neighbour is not favorite image button is empty
-                     */
+
                     mImageButtonFav.setImageResource(R.drawable.ic_star_white_24dp);
                     Toast.makeText(this, "add to favorites", Toast.LENGTH_LONG).show();
                 } else {
@@ -93,19 +107,21 @@ public class DetailVoisinActivity extends AppCompatActivity {
                 }
 
             });
-            /**
-             * back to previously page
-             */
-            mButtonBack.setOnClickListener(v -> {
-                Intent BackIntent = new Intent();
-                setResult(RESULT_OK,BackIntent);
-                finish();
-            });
+
         }
     }
+
+    /**
+     * back to previously page
+     */
+    private void actionOnDeleteButton() {
+
+        mButtonBack.setOnClickListener(v -> {
+            finish();
+        });
+    }
+
 }
-
-
 
 
 

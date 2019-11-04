@@ -43,7 +43,7 @@ public class FavNeighboursFragment extends Fragment implements MyNeighbourRecycl
     private List<Neighbour> mFavNeighbours;
     private RecyclerView mRecyclerView;
     private MyNeighbourRecyclerViewAdapter mAdapter;
-    public static final int DETAIL_Activity_Request_Code = 1;
+
 
     /**
      * Use this factory method to create a new instance of
@@ -125,10 +125,8 @@ public class FavNeighboursFragment extends Fragment implements MyNeighbourRecycl
         Context context = getActivity();
         Intent intent = new Intent(context, DetailVoisinActivity.class);
         intent.putExtra("Neighbour", mFavNeighbours.get(position));
-
-        startActivityForResult(intent,DETAIL_Activity_Request_Code);
+        startActivity(intent);
     }
-
 
 }
 
