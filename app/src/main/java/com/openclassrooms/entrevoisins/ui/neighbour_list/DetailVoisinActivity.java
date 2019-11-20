@@ -1,8 +1,5 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
-import android.app.Activity;
-import android.app.Instrumentation;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +11,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
-import com.openclassrooms.entrevoisins.fragment.FavNeighboursFragment;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
@@ -47,7 +43,7 @@ public class DetailVoisinActivity extends AppCompatActivity {
     TextView mTextViewMailText;
 
     private NeighbourApiService mApiService;
-    private Neighbour mNeighbour;
+
 
 
     @Override
@@ -59,9 +55,8 @@ public class DetailVoisinActivity extends AppCompatActivity {
 
 
         displayDetail();
-
         actionOnFavoriteButton();
-        actionOnDeleteButton();
+        actionOnButtonback();
 
     }
 
@@ -114,7 +109,7 @@ public class DetailVoisinActivity extends AppCompatActivity {
     /**
      * back to previously page
      */
-    private void actionOnDeleteButton() {
+    private void actionOnButtonback() {
 
         mButtonBack.setOnClickListener(v -> {
             finish();

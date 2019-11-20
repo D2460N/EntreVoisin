@@ -17,7 +17,6 @@ import com.openclassrooms.entrevoisins.model.Neighbour;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.lang.reflect.Type;
 import java.util.List;
 
 import butterknife.BindView;
@@ -68,6 +67,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
                switch (mType){
                    case NEIGHBOURS:
                     EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
+                    EventBus.getDefault().post(new DeleteFavNeighbourEvent(neighbour));
                     break;
                    case FAVORITE:
                     EventBus.getDefault().post(new DeleteFavNeighbourEvent(neighbour));
