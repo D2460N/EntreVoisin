@@ -40,6 +40,12 @@ public class NeighbourServiceTest {
         Neighbour neighbourToDelete = service.getNeighbours().get(0);
         service.deleteNeighbour(neighbourToDelete);
         assertFalse(service.getNeighbours().contains(neighbourToDelete));
+        Neighbour neighbour = new Neighbour(1, "Caroline", "http://i.pravatar.cc/150?u=a042581f4e29026704d");
+        service.addFavorites(neighbour);
+        Neighbour neighbourFavToDelete = service.getFavorites().get(0);
+        service.deleteFavorites(neighbourFavToDelete);
+        assertFalse(service.getFavorites().contains(neighbourFavToDelete));
+
     }
 
     @Test
@@ -47,6 +53,7 @@ public class NeighbourServiceTest {
         List<Neighbour> mFavneighbours = service.getNeighbours();
         List<Neighbour> expectedmFavNeighbours = DummyNeighbourGenerator.DUMMY_NEIGHBOURS;
         assertThat(mFavneighbours, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedmFavNeighbours.toArray()));
+
 
 
     }
@@ -65,8 +72,8 @@ public class NeighbourServiceTest {
     public void deleteNeighbourFavorite (){
         Neighbour neighbour = new Neighbour(1, "Caroline", "http://i.pravatar.cc/150?u=a042581f4e29026704d");
         service.addFavorites(neighbour);
-        Neighbour neighbourToDelete = service.getFavorites().get(0);
-        service.deleteFavorites(neighbourToDelete);
-        assertFalse(service.getFavorites().contains(neighbourToDelete));
+        Neighbour neighbourFavToDelete = service.getFavorites().get(0);
+        service.deleteFavorites(neighbourFavToDelete);
+        assertFalse(service.getFavorites().contains(neighbourFavToDelete));
     }
 }
