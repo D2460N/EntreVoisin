@@ -71,7 +71,7 @@ public class NeighboursListTest {
     }
 
     /**
-     * When we delete an item, the item is no more shown
+     * When we delete an item, the item is no more shown even for favList.
      */
     @Test
     public void myNeighboursList_deleteAction_shouldRemoveItem() {
@@ -82,6 +82,25 @@ public class NeighboursListTest {
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
         // Then : the number of element is 11
         onView(withId(R.id.list_neighbours)).check(withItemCount(ITEMS_COUNT-1));
+        // for favorite
+        // show detail neighbour
+        onView(withId(R.id.list_neighbours)).perform(RecyclerViewActions.actionOnItemAtPosition(POSITION_ITEM,click()));
+        onView(withId(R.id.acttivity_detail)).check(matches(isDisplayed()));
+        // click on fav button
+        onView(withId(R.id.floatingActionButtonFav)).perform(click());
+        // go back
+        onView(withId(R.id.imageButtonBack)).perform(click());
+        // select favorites list
+        onView(withId(R.id.container)).perform(scrollRight());
+        // check the list of favorites contains one neighbour
+        onView(withId(R.id.fav_list_neighbours)).check(matches(isDisplayed()));
+        onView(withId(R.id.fav_list_neighbours)).check(withItemCount(1));
+        // delete this neighbour
+        onView(withId(R.id.fav_list_neighbours))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, new DeleteViewAction()));
+        // check the list is empty
+        onView(withId(R.id.fav_list_neighbours)).check(matches(hasMinimumChildCount(0)));
+
     }
     @Test
     public void clickItem_showDetailNeighbour () {
